@@ -160,8 +160,12 @@ class TestVolumeConfirmationSymbolPrefix:
         seen = {}
 
         def fake_gma(screener, interval, symbols):
-            seen["symbols"] = symbols
-            seen["screener"] = screener
+            # setdefault: keep the FIRST call. The auto-venue fallback retries
+            # an empty result on another listing venue (a second gma call with
+            # that venue's prefix); this test pins the symbol sent for the
+            # REQUESTED venue, which the fallback retry must not overwrite.
+            seen.setdefault("symbols", symbols)
+            seen.setdefault("screener", screener)
             return {}  # empty -> function returns a "No data" envelope after the call
 
         orig = svc.get_multiple_analysis
