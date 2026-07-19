@@ -4,8 +4,10 @@ services:
     build: .
     image: 'atilaahmet/tradingview-mcp:latest'
     container_name: tradingview-mcp
-    # Hapus bagian ports: - '8081:8000'
     restart: unless-stopped
     environment:
       - PORT=8000
       - HOST=0.0.0.0
+    # Tambahkan baris di bawah ini untuk mematikan health check Traefik/Docker secara total:
+    healthcheck:
+      disable: true
