@@ -99,10 +99,6 @@ except ImportError:
 
 
 # ── MCP server instance ────────────────────────────────────────────────────────
-# 1. Tambahkan pembacaan env di sini:
-allowed_hosts_env = os.getenv("MCP_ALLOWED_HOSTS", "*")
-allowed_hosts = [h.strip() for h in allowed_hosts_env.split(",") if h.strip()]
-# 2. Ganti instansiasi mcp:
 mcp = FastMCP(
     name="TradingView Multi-Market Screener",
     instructions=(
@@ -115,10 +111,9 @@ mcp = FastMCP(
         "volume_breakout_scanner, futures_market_overview, futures_top_movers, "
         "futures_category_snapshot, futures_watchlist, egx_market_overview, and more."
     ),
+    # Atur parameter ini menjadi False untuk mematikan pengecekan Host header secara total:
     transport_security=TransportSecuritySettings(
-        enable_dns_rebinding_protection=True,
-        allowed_hosts=allowed_hosts,
-        allowed_origins=["*"]
+        enable_dns_rebinding_protection=False
     )
 )
 
