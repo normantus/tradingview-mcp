@@ -22,7 +22,7 @@ STOCK_EXCHANGES: Set[str] = {
     "asx",
     "sse", "szse", "chn",
     "twse", "tpex",
-    "tadawul", "tasi",                  # Saudi Stock Exchange (Tadawul) — All Share Index (TASI)
+    "tadawul", "tasi","idx",                  # Saudi Stock Exchange (Tadawul) — All Share Index (TASI)
 }
 
 EXCHANGE_SCREENER = {
@@ -67,6 +67,7 @@ EXCHANGE_SCREENER = {
     # Saudi Stock Market (Tadawul) — TradingView scanner uses /ksa/
     "tadawul": "ksa",
     "tasi": "ksa",          # alias: Tadawul All Share Index
+    "idx": "indonesia",
 }
 
 # Venues TradingView serves for single-symbol TA (tradingview-ta) but NOT via the
@@ -111,6 +112,7 @@ _EXCHANGE_TV_PREFIX: dict = {
     "tpex": "TPEX",
     "tadawul": "TADAWUL",
     "tasi": "TADAWUL",
+    "idx": "IDX",
 }
 
 _YAHOO_SYMBOL_ALIASES: dict = {
