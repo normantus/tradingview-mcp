@@ -104,7 +104,7 @@ mcp = FastMCP(
     instructions=(
         "Multi-market screener backed by TradingView. "
         "Supports crypto exchanges (KuCoin, Binance, Bybit, MEXC, etc.), stock markets "
-        "(EGX, BIST, NASDAQ, NYSE, Bursa Malaysia, HKEX, SSE, SZSE, TWSE, TPEX), "
+        "(EGX, BIST, NASDAQ, NYSE, Bursa Malaysia, HKEX, SSE, SZSE, TWSE, TPEX, IDX), "
         "and futures markets (CME, COMEX, NYMEX, CBOT — equity index, energy, metals, "
         "agriculture, rates, forex, crypto futures). "
         "Tools: top_gainers, top_losers, bollinger_scan, coin_analysis, multi_agent_analysis, "
@@ -155,7 +155,7 @@ async def top_gainers(exchange: str = "KUCOIN", timeframe: str = "15m", limit: i
 
 @mcp.tool(annotations=ToolAnnotations(title="Top Losers Screener", readOnlyHint=True, destructiveHint=False, openWorldHint=True))
 def top_losers(exchange: str = "KUCOIN", timeframe: str = "15m", limit: int = 25) -> list[dict] | dict:
-    """Return top losers for an exchange and timeframe. Supports crypto (KUCOIN, BINANCE, MEXC) and stocks (EGX, BIST, NASDAQ).
+    """Return top losers for an exchange and timeframe. Supports crypto (KUCOIN, BINANCE, MEXC) and stocks (EGX, BIST, NASDAQ, IDX).
 
     Returns ``list[dict]`` on success, or an error envelope on total upstream
     failure (``{"error": {"code": "ALL_BATCHES_FAILED", ...}}``).
@@ -187,7 +187,7 @@ def bollinger_scan(exchange: str = "KUCOIN", timeframe: str = "4h", bbw_threshol
     Example: bollinger_scan(exchange="BINANCE", timeframe="15m", bbw_threshold=0.008)
 
     Args:
-        exchange: Exchange — crypto: KUCOIN, BINANCE, BYBIT, MEXC; stocks: EGX, BIST, NASDAQ, NYSE, BURSA, HKEX, SSE, SZSE, TWSE, TPEX
+        exchange: Exchange — crypto: KUCOIN, BINANCE, BYBIT, MEXC; stocks: EGX, BIST, NASDAQ, NYSE, BURSA, HKEX, SSE, SZSE, TWSE, TPEX, IDX
         timeframe: One of 5m, 15m, 1h, 4h, 1D, 1W, 1M. Typical squeeze thresholds: 15m→0.008, 1h→0.02, 4h→0.04, 1D→0.12
         bbw_threshold: Maximum BBW value to filter (default 0.04)
         limit: Number of rows to return (max 100)
@@ -244,7 +244,7 @@ def coin_analysis(symbol: str, exchange: str = "KUCOIN", timeframe: str = "15m")
 
     Args:
         symbol: Bare ticker, no exchange prefix — crypto: "BTCUSDT", "ETHUSDT"; stocks: "COMI" (EGX), "THYAO" (BIST), "600519" (SSE), "300251" (SZSE), "2330" (TWSE), "3105" (TPEX)
-        exchange: Exchange — crypto: KUCOIN, BINANCE, MEXC; stocks: EGX, BIST, NASDAQ, NYSE, BURSA, HKEX, SSE, SZSE, TWSE, TPEX. If the symbol isn't listed there, the error's `listed_on` field names exchanges that do list it.
+        exchange: Exchange — crypto: KUCOIN, BINANCE, MEXC; stocks: EGX, BIST, NASDAQ, NYSE, BURSA, HKEX, SSE, SZSE, TWSE, TPEX, IDX. If the symbol isn't listed there, the error's `listed_on` field names exchanges that do list it.
         timeframe: Time interval (5m, 15m, 1h, 4h, 1D, 1W, 1M)
 
     Returns:
